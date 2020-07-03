@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
 [ext_resource path="res://Node2D.gd" type="Script" id=2]
 [ext_resource path="res://black_ball.jpg" type="Texture" id=3]
+[ext_resource path="res://link_sprite.png" type="Texture" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 31.9002, 32.9043 )
@@ -37,12 +38,15 @@ points = PoolVector2Array( 64, 64, 0, 64, 0, 0, 64, 0 )
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 935.125, 61.8378 )
-texture = ExtResource( 1 )
+position = Vector2( 966.461, 455.712 )
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 4 )
 
 [node name="test_rigid_body" type="RigidBody2D" parent="."]
-visible = false
-position = Vector2( 166.055, 101.098 )
+position = Vector2( 111.901, 190.39 )
+mode = 1
+linear_velocity = Vector2( 200, 0 )
+applied_torque = 50.0
 
 [node name="test_sprite" type="Sprite" parent="test_rigid_body"]
 texture = ExtResource( 1 )
@@ -53,26 +57,41 @@ shape = SubResource( 1 )
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource( 3 )
 format = 1
-tile_data = PoolIntArray( 524288, 0, 0, 524289, 0, 0, 524290, 0, 0, 524291, 0, 0, 524292, 0, 0, 524293, 0, 0, 524294, 0, 0, 524295, 0, 0, 524296, 0, 0, 524297, 0, 0, 524298, 0, 0, 524299, 0, 0, 524300, 0, 0, 524301, 0, 0, 524302, 0, 0, 524303, 0, 0, 589824, 0, 0, 589825, 0, 0, 589826, 0, 0, 589827, 0, 0, 589828, 0, 0, 589829, 0, 0, 589830, 0, 0, 589831, 0, 0, 589832, 0, 0, 589833, 0, 0, 589834, 0, 0, 589835, 0, 0, 589836, 0, 0, 589837, 0, 0, 589838, 0, 0, 589839, 0, 0 )
+tile_data = PoolIntArray( 983040, 0, 0, 983041, 0, 0, 983042, 0, 0, 983043, 0, 0, 983044, 0, 0, 983045, 0, 0, 983046, 0, 0, 983047, 0, 0, 983048, 0, 0, 983049, 0, 0, 983050, 0, 0, 983051, 0, 0, 983052, 0, 0, 983053, 0, 0, 983054, 0, 0, 983055, 0, 0, 983056, 0, 0, 983057, 0, 0, 983058, 0, 0, 983059, 0, 0, 983060, 0, 0, 983061, 0, 0, 983062, 0, 0, 983063, 0, 0, 983064, 0, 0, 983065, 0, 0, 983066, 0, 0, 983067, 0, 0, 983068, 0, 0, 983069, 0, 0, 1048576, 0, 0, 1048577, 0, 0, 1048578, 0, 0, 1048579, 0, 0, 1048580, 0, 0, 1048581, 0, 0, 1048582, 0, 0, 1048583, 0, 0, 1048584, 0, 0, 1048585, 0, 0, 1048586, 0, 0, 1048587, 0, 0, 1048588, 0, 0, 1048589, 0, 0, 1048590, 0, 0, 1048591, 0, 0, 1048592, 0, 0, 1048593, 0, 0, 1048594, 0, 0, 1048595, 0, 0, 1048596, 0, 0, 1048597, 0, 0, 1048598, 0, 0, 1048599, 0, 0, 1048600, 0, 0, 1048601, 0, 0, 1048602, 0, 0, 1048603, 0, 0, 1048604, 0, 0, 1048605, 0, 0 )
 
 [node name="debug_spawn" type="Position2D" parent="."]
-position = Vector2( 487.218, 115.634 )
+position = Vector2( 964.636, 303.724 )
 __meta__ = {
 "_gizmo_extents_": 68.3
 }
 
 [node name="debug_sprite" type="Sprite" parent="."]
 modulate = Color( 0.533333, 0, 0, 1 )
-position = Vector2( 171.883, 174.468 )
+position = Vector2( 115.144, 250.837 )
 texture = ExtResource( 3 )
 
 [node name="fps" type="Label" parent="."]
-margin_left = 12.9236
-margin_top = 9.04648
-margin_right = 52.9236
-margin_bottom = 23.0465
+margin_left = 33.0823
+margin_top = 26.6854
+margin_right = 75.0823
+margin_bottom = 40.6854
 rect_scale = Vector2( 3, 3 )
 text = "FPS: ??"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="despawn_tween" type="Tween" parent="."]
+
+[node name="Button" type="Button" parent="."]
+margin_left = 869.38
+margin_top = 21.8916
+margin_right = 952.38
+margin_bottom = 41.8916
+rect_scale = Vector2( 2, 2 )
+text = "START"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="tween_completed" from="despawn_tween" to="." method="_on_despawn_tween_tween_completed"]
+[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
