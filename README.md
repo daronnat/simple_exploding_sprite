@@ -15,6 +15,7 @@ Then run the scene file from the "2D" panel (Node2D.tscn).
 ## The output
 
 Screen-capture of the project:
+
 ![explode_sprite_godot](https://user-images.githubusercontent.com/32872858/196038364-7a464096-b02b-4e7c-af50-ebd0dc6d6ce9.gif)
 
 ## Built With
